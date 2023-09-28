@@ -11,16 +11,20 @@ export const continentalConditions = [
     {regionName: 'Organisateur', amount:3}
 ]
 
-export const paysOrganisateur = (fifaRanking) => {
+// Retrait des pays organisateurs (fix des données)
+export const paysOrganisateurs = (fifaRanking) => {
     return fifaRanking.filter((p) => p.teamName === 'USA'|| p.teamName === 'Mexico' || p.teamName === 'Canada' )
 }
-export const listePaysSansOrganisateurs = (fifaRanking, paysOrganisateur) =>{
-    const listePaysSansOrganisateurs = (fifaRanking) => {
-        const paysOrganisateurs = paysOrganisateur(fifaRanking);
 
-        return fifaRanking.filter((p) => !paysOrganisateurs.includes(p));
-    }
+export const listePaysSansOrganisateurs = (fifaRanking) => {
+    const po = paysOrganisateurs(fifaRanking);
+    return fifaRanking.filter((team) => !paysOrganisateurs.includes(team));
+}
 
+// Fix des diff entre les terminologies
+export const returnMatchingContinent = (regName, conditions) => {
+    const matchingContinent = conditions.filter((n) => n.regionName === regName).pop()
+    return matchingContinent.continent;
 }
 
 export const returnAmountOfTeamsPerContinent = (continent, conditions) => {
@@ -28,28 +32,23 @@ export const returnAmountOfTeamsPerContinent = (continent, conditions) => {
     return matchingContinent.amount;
 };
 
-export const returnMatchingContinent = (regName, conditions) => {
-    const matchingContinent = conditions.filter((n) => n.regionName === regName).pop()
-    return matchingContinent.continent;
-}
 
-
+// Sélection des équipes qualifiées en fonction des règles de qualification
 export const teamSelection = (regName, conditions) => {
     const continent = returnMatchingContinent(regName,conditions);
     const amount = returnAmountOfTeamsPerContinent(continent, conditions)
     console.log("AMOUNT:::",amount)
 
-    const topTeams = fifaRanking
+    const topTeams = listePaysSansOrganisateurs
         .filter((team) => team.continent === continent)
         .sort((a, b) => a.rank - b.rank)
 
     const selectedTeams = topTeams.slice(0, amount);
 
+    console.log(selectedTeams)
     return selectedTeams;
 
 }
-
-// Étape 1: Sélection des équipes qualifiées en fonction des règles de qualification
 
 const qualifiedTeams = [];
 continentalConditions.forEach((condition) => {
@@ -58,10 +57,7 @@ continentalConditions.forEach((condition) => {
 });
 
 
-
-
-teamSelection("OFC", continentalConditions)
-
-//TODO: Phase de groupe(
-//TODO: Phase élim(
-//TODO: WeHaveAWinner(
+//TODO: Phase de groupe()
+//TODO: Phase élim()
+//TODO: Penalty()
+//TODO: WeHaveAWinner()

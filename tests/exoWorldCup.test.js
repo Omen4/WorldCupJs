@@ -14,6 +14,7 @@ describe("Return amount of teams per continent",()=>{
   })
 });
 
+//Todo
 describe("Return teams selection per continent",()=>{
   test("returnTeamsPerContinent",() => {
     expect(teamSelection(continentChosen)).toEqual(teamSelection(continentChosen));

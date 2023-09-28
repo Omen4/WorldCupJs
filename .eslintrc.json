@@ -1,0 +1,40 @@
+{
+    "env": {
+        "es2021": true,
+        "node": true
+    },
+    "overrides": [],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": [
+        "functional"
+    ],
+    "extends": [
+        "eslint:recommended"
+    ],
+    "rules": {
+        "no-var": "warn",
+        "prefer-const": "warn",
+        "no-param-reassign": "warn",
+        "functional/functional-parameters": "",
+        "functional/no-promise-reject": "warn",
+        "functional/no-throw-statements": "warn",
+        "functional/no-try-statements": "warn",
+        "functional/immutable-data": "warn",
+        "functional/no-let": "warn",
+        "functional/prefer-readonly-type": "warn",
+        "functional/type-declaration-immutability": "warn",
+        "functional/no-classes": "warn",
+        "functional/no-mixed-types": "warn",
+        "functional/no-this-expressions": "warn",
+        "functional/no-conditional-statements": "warn",
+        "functional/no-expression-statements": "warn",
+        "functional/no-loop-statements": "warn",
+        "functional/no-return-void": "warn",
+        "functional/prefer-property-signatures": "warn",
+        "functional/prefer-tacit": "warn",
+        "functional/readonly-type": "warn"
+    }
+}
